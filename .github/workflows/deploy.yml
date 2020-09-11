@@ -1,20 +1,25 @@
-name: push-tests
-on: [push]
+name: deploy
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+on: [deployment_status]
 jobs:
-  cypress-run:
+  e2e:
+    # only runs this job on successful deploy
+    if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
+      - name: Print URL 🖨
+        run: echo Testing URL ${{ github.event.deployment_status.target_url }}
       - name: Checkout 🛎
         uses: actions/checkout@v1
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run ✅
+      - name: Run Cypress 🌲
         uses: cypress-io/github-action@v2
         with:
-          start: npm start
           record: true
-          group: push
+          command-prefix: 'percy exec -- npx'
+          group: deploy
         env:
+          # url coming from Vercel deploy
+          CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately
