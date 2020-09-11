@@ -8,27 +8,6 @@ import initArray from '../cypress/fixtures/init-array.json'
 import solvedArray from '../cypress/fixtures/solved-array.json'
 
 describe('App', () => {
-  it('looks good', () => {
-    mount(<App />)
-
-    cy.log('**game sections**')
-    // ensure the board has rendered
-    cy.get('.game__board').should('be.visible').wait(1000)
-    cy.get('.header').percySnapshot('header')
-    cy.get('.status__difficulty').percySnapshot('difficulty')
-    cy.get('.status__actions').percySnapshot('actions')
-
-    cy.log('**numbers**')
-    cy.get('.status__numbers').percySnapshot('numbers')
-
-    cy.get('.status__action-fast-mode').click()
-
-    cy.contains('.status__number', '5')
-      .click()
-      .should('have.class', 'status__number--selected')
-    cy.get('.status__numbers').percySnapshot('numbers-selected')
-  })
-
   it('shows the timer', () => {
     cy.clock()
     mount(<App />)
@@ -58,10 +37,14 @@ describe('App', () => {
     cy.get('.container').percySnapshot('same-game-container')
 
     cy.viewport('iphone-6')
-    cy.get('.container').percySnapshot('same-game-container-iphone6')
+    cy.get('.container').percySnapshot('same-game-container-iphone6', {
+      widths: [400],
+    })
 
     cy.viewport(250, 400)
-    cy.get('.container').percySnapshot('same-game-container-250px')
+    cy.get('.container').percySnapshot('same-game-container-250px', {
+      widths: [250],
+    })
   })
 
   it('plays a move', () => {

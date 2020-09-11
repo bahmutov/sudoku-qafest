@@ -71,6 +71,6 @@ describe('Numbers', () => {
       'have.class',
       'status__number--selected',
     )
-    cy.get('.status__numbers').percySnapshot('numbers-selected')
+    cy.percySnapshot('numbers-selected')
   })
 })

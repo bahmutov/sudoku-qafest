@@ -38,6 +38,8 @@ describe('App', () => {
     cy.viewport(500, 700).wait(100)
     cy.get('.container').percySnapshot('tablet')
     cy.viewport(300, 700).wait(100)
-    cy.get('.container').percySnapshot('mobile')
+    cy.get('.container').percySnapshot('mobile', {
+      widths: [300],
+    })
   })
 })
