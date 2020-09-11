@@ -42,7 +42,7 @@ describe('Numbers', () => {
     // use a single image snapshot after making sure
     // the component has been rendered into the DOM
     cy.get('.status__number').should('have.length', 9)
-    cy.percySnapshot()
+    cy.visualSnapshot()
   })
 
   it('reacts to a click', () => {
@@ -71,6 +71,6 @@ describe('Numbers', () => {
       'have.class',
       'status__number--selected',
     )
-    cy.percySnapshot()
+    cy.visualSnapshot()
   })
 })
