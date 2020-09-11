@@ -13,6 +13,7 @@ jobs:
         with:
           start: npm start
           record: true
+          command-prefix: 'percy exec -- npx'
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
