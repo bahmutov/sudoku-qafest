@@ -11,9 +11,9 @@ describe('App', () => {
   it('shows the timer', () => {
     cy.clock()
     mount(<App />)
-    cy.contains('.status__time', '00:00').percySnapshot('timer-zero')
+    cy.contains('.status__time', '00:00') // .percySnapshot('timer-zero')
     cy.tick(700 * 1000)
-    cy.contains('.status__time', '11:40').percySnapshot('timer-passed')
+    cy.contains('.status__time', '11:40') // .percySnapshot('timer-passed')
   })
 
   it('checks the entire game', () => {
@@ -21,7 +21,7 @@ describe('App', () => {
     mount(<App />)
     cy.get('.game__cell--filled').should('have.length', 45)
     cy.get('.game__cell').each(($cell) => $cell.css('opacity', '0'))
-    cy.get('.container').percySnapshot('game-container')
+    // cy.get('.container').percySnapshot('game-container')
   })
 
   it('shows deterministic board', () => {
@@ -34,17 +34,17 @@ describe('App', () => {
     cy.clock()
     mount(<App />)
     cy.get('.game__cell--filled').should('have.length', 45)
-    cy.get('.container').percySnapshot('same-game-container')
+    // cy.get('.container').percySnapshot('same-game-container')
 
-    cy.viewport('iphone-6')
-    cy.get('.container').percySnapshot('same-game-container-iphone6', {
-      widths: [400],
-    })
+    // cy.viewport('iphone-6')
+    // cy.get('.container').percySnapshot('same-game-container-iphone6', {
+    //   widths: [400],
+    // })
 
-    cy.viewport(250, 400)
-    cy.get('.container').percySnapshot('same-game-container-250px', {
-      widths: [250],
-    })
+    // cy.viewport(250, 400)
+    // cy.get('.container').percySnapshot('same-game-container-250px', {
+    //   widths: [250],
+    // })
   })
 
   it('plays a move', () => {
@@ -61,7 +61,7 @@ describe('App', () => {
     cy.get('.game__cell')
       .first()
       .should('have.class', 'game__cell--highlightselected')
-    cy.get('.container').percySnapshot('same-game-container-move')
+    // cy.get('.container').percySnapshot('same-game-container-move')
   })
 
   it('mocks board creation', () => {
@@ -76,7 +76,7 @@ describe('App', () => {
     cy.clock()
     mount(<App />)
     cy.get('.game__cell--filled').should('have.length', 45)
-    cy.get('.container').percySnapshot('same-game-mocked-sudoku')
+    // cy.get('.container').percySnapshot('same-game-mocked-sudoku')
   })
 
   it('plays one move', () => {
@@ -88,7 +88,7 @@ describe('App', () => {
     cy.get('.game__cell')
       .first()
       .should('have.class', 'game__cell--highlightselected')
-    cy.get('.container').percySnapshot('same-game-made-one-move')
+    // cy.get('.container').percySnapshot('same-game-made-one-move')
   })
 
   it('plays to win', () => {
@@ -106,7 +106,7 @@ describe('App', () => {
     cy.contains('.status__number', solvedArray[0]).click()
     // winning message displayed
     cy.get('.overlay__text').should('be.visible')
-    cy.get('.container').percySnapshot('game-solved')
+    // cy.get('.container').percySnapshot('game-solved')
 
     // clicking the overlay starts the new game
     cy.get('@getUniqueSudoku').should('have.been.calledOnce')

@@ -18,7 +18,7 @@ describe('StatusSection', () => {
       .find('input[type=checkbox]')
       .should('not.be.checked')
 
-    cy.percySnapshot('status')
+    // cy.percySnapshot('status')
 
     cy.log('**turn both modes on**')
     cy.get('.status__action-mistakes-mode')
@@ -33,6 +33,6 @@ describe('StatusSection', () => {
       .find('input[type=checkbox]')
       .should('be.checked')
 
-    cy.percySnapshot('status-both-modes')
+    // cy.percySnapshot('status-both-modes')
   })
 })
