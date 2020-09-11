@@ -1,5 +1,6 @@
 {
   "name": "sudoku-qafest",
+  "description": "Sudoku game with E2E tests against full deploys and component tests",
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
