@@ -4,7 +4,6 @@ import { Header } from './components/layout/Header'
 import { GameSection } from './components/layout/GameSection'
 import { StatusSection } from './components/layout/StatusSection'
 import { Overlay } from './components/Overlay'
-import { Footer } from './components/layout/Footer'
 import { getUniqueSudoku } from './solver/UniqueSudoku'
 import { useSudokuContext } from './context/SudokuContext'
 
@@ -27,48 +26,59 @@ export const Game = () => {
    * overlay: Is the 'Game Solved' overlay enabled?
    * won: Is the game 'won'?
    */
-  let { numberSelected, setNumberSelected,
-        gameArray, setGameArray,
-        difficulty, setDifficulty,
-        setTimeGameStarted,
-        fastMode, setFastMode,
-        cellSelected, setCellSelected,
-        initArray, setInitArray,
-        setWon } = useSudokuContext();
-  let [ mistakesMode, setMistakesMode ] = useState(false);
-  let [ history, setHistory ] = useState([]);
-  let [ solvedArray, setSolvedArray ] = useState([]);
-  let [ overlay, setOverlay ] = useState(false);
+  let {
+    numberSelected,
+    setNumberSelected,
+    gameArray,
+    setGameArray,
+    difficulty,
+    setDifficulty,
+    setTimeGameStarted,
+    fastMode,
+    setFastMode,
+    cellSelected,
+    setCellSelected,
+    initArray,
+    setInitArray,
+    setWon,
+  } = useSudokuContext()
+  let [mistakesMode, setMistakesMode] = useState(false)
+  let [history, setHistory] = useState([])
+  let [solvedArray, setSolvedArray] = useState([])
+  let [overlay, setOverlay] = useState(false)
 
   /**
    * Creates a new game and initializes the state variables.
    */
   function _createNewGame(e) {
-    let [temporaryInitArray, temporarySolvedArray] = getUniqueSudoku(difficulty, e);
+    let [temporaryInitArray, temporarySolvedArray] = getUniqueSudoku(
+      difficulty,
+      e,
+    )
 
-    setInitArray(temporaryInitArray);
-    setGameArray(temporaryInitArray);
-    setSolvedArray(temporarySolvedArray);
-    setNumberSelected('0');
-    setTimeGameStarted(moment());
-    setCellSelected(-1);
-    setHistory([]);
-    setWon(false);
+    setInitArray(temporaryInitArray)
+    setGameArray(temporaryInitArray)
+    setSolvedArray(temporarySolvedArray)
+    setNumberSelected('0')
+    setTimeGameStarted(moment())
+    setCellSelected(-1)
+    setHistory([])
+    setWon(false)
   }
 
   /**
    * Checks if the game is solved.
    */
   function _isSolved(index, value) {
-    if (gameArray.every((cell, cellIndex) => {
-          if (cellIndex === index)
-            return value === solvedArray[cellIndex];
-          else
-            return cell === solvedArray[cellIndex];
-        })) {
-      return true;
+    if (
+      gameArray.every((cell, cellIndex) => {
+        if (cellIndex === index) return value === solvedArray[cellIndex]
+        else return cell === solvedArray[cellIndex]
+      })
+    ) {
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -78,19 +88,19 @@ export const Game = () => {
   function _fillCell(index, value) {
     if (initArray[index] === '0') {
       // Direct copy results in interesting set of problems, investigate more!
-      let tempArray = gameArray.slice();
-      let tempHistory = history.slice();
+      let tempArray = gameArray.slice()
+      let tempHistory = history.slice()
 
       // Can't use tempArray here, due to Side effect below!!
-      tempHistory.push(gameArray.slice());
-      setHistory(tempHistory);
+      tempHistory.push(gameArray.slice())
+      setHistory(tempHistory)
 
-      tempArray[index] = value;
-      setGameArray(tempArray);
+      tempArray[index] = value
+      setGameArray(tempArray)
 
       if (_isSolved(index, value)) {
-        setOverlay(true);
-        setWon(true);
+        setOverlay(true)
+        setWon(true)
       }
     }
   }
@@ -102,13 +112,12 @@ export const Game = () => {
   function _userFillCell(index, value) {
     if (mistakesMode) {
       if (value === solvedArray[index]) {
-        _fillCell(index, value);
-      }
-      else {
+        _fillCell(index, value)
+      } else {
         // TODO: Flash - Mistakes not allowed in Mistakes Mode
       }
     } else {
-      _fillCell(index, value);
+      _fillCell(index, value)
     }
   }
 
@@ -117,7 +126,7 @@ export const Game = () => {
    * create a new game.
    */
   function onClickNewGame() {
-    _createNewGame();
+    _createNewGame()
   }
 
   /**
@@ -125,9 +134,9 @@ export const Game = () => {
    */
   function onClickCell(indexOfArray) {
     if (fastMode && numberSelected !== '0') {
-      _userFillCell(indexOfArray, numberSelected);
+      _userFillCell(indexOfArray, numberSelected)
     }
-    setCellSelected(indexOfArray);
+    setCellSelected(indexOfArray)
   }
 
   /**
@@ -136,8 +145,8 @@ export const Game = () => {
    * 2. Create New Game
    */
   function onChangeDifficulty(e) {
-    setDifficulty(e.target.value);
-    _createNewGame(e);
+    setDifficulty(e.target.value)
+    _createNewGame(e)
   }
 
   /**
@@ -148,7 +157,7 @@ export const Game = () => {
     if (fastMode) {
       setNumberSelected(number)
     } else if (cellSelected !== -1) {
-      _userFillCell(cellSelected,number);
+      _userFillCell(cellSelected, number)
     }
   }
 
@@ -157,11 +166,11 @@ export const Game = () => {
    * try to Undo the latest change.
    */
   function onClickUndo() {
-    if(history.length) {
-      let tempHistory = history.slice();
-      let tempArray = tempHistory.pop();
-      setHistory(tempHistory);
-      setGameArray(tempArray);
+    if (history.length) {
+      let tempHistory = history.slice()
+      let tempArray = tempHistory.pop()
+      setHistory(tempHistory)
+      setGameArray(tempArray)
     }
   }
 
@@ -170,8 +179,8 @@ export const Game = () => {
    * try to delete the cell.
    */
   function onClickErase() {
-    if(cellSelected !== -1 && gameArray[cellSelected] !== '0') {
-      _fillCell(cellSelected, '0');
+    if (cellSelected !== -1 && gameArray[cellSelected] !== '0') {
+      _fillCell(cellSelected, '0')
     }
   }
 
@@ -181,15 +190,15 @@ export const Game = () => {
    */
   function onClickHint() {
     if (cellSelected !== -1) {
-      _fillCell(cellSelected, solvedArray[cellSelected]);
+      _fillCell(cellSelected, solvedArray[cellSelected])
     }
   }
 
   /**
    * Toggle Mistakes Mode
    */
-  function  onClickMistakesMode() {
-    setMistakesMode(!mistakesMode);
+  function onClickMistakesMode() {
+    setMistakesMode(!mistakesMode)
   }
 
   /**
@@ -197,36 +206,34 @@ export const Game = () => {
    */
   function onClickFastMode() {
     if (fastMode) {
-      setNumberSelected('0');
+      setNumberSelected('0')
     }
-    setCellSelected(-1);
-    setFastMode(!fastMode);
+    setCellSelected(-1)
+    setFastMode(!fastMode)
   }
 
   /**
    * Close the overlay on Click.
    */
   function onClickOverlay() {
-    setOverlay(false);
-    _createNewGame();
+    setOverlay(false)
+    _createNewGame()
   }
 
   /**
    * On load, create a New Game.
    */
   useEffect(() => {
-    _createNewGame();
-  // eslint-disable-next-line
-  }, []);
+    _createNewGame()
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <>
-      <div className={overlay?"container blur":"container"}>
-        <Header onClick={onClickNewGame}/>
+      <div className={overlay ? 'container blur' : 'container'}>
+        <Header onClick={onClickNewGame} />
         <div className="innercontainer">
-          <GameSection
-            onClick={(indexOfArray) => onClickCell(indexOfArray)}
-          />
+          <GameSection onClick={(indexOfArray) => onClickCell(indexOfArray)} />
           <StatusSection
             onClickNumber={(number) => onClickNumber(number)}
             onChange={(e) => onChangeDifficulty(e)}
@@ -237,9 +244,8 @@ export const Game = () => {
             onClickFastMode={onClickFastMode}
           />
         </div>
-        <Footer />
       </div>
       <Overlay overlay={overlay} onClickOverlay={onClickOverlay} />
     </>
-  );
+  )
 }
