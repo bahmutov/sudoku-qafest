@@ -12,7 +12,11 @@ describe('Sudoku', () => {
       cy.get('.game__cell--filled').should('have.length', 45)
       cy.contains('.status__time', '00:00')
       cy.contains('.status__difficulty-select', 'Easy')
-      cy.percySnapshot('mobile', { widths: [300] })
+      cy.percySnapshot('mobile', {
+        widths: [300],
+        // hide all numbers when taking the snapshot
+        percyCSS: `.game__cell--filled { opacity: 0; }`,
+      })
     })
   })
 })
