@@ -1,6 +1,6 @@
 name: main
-# only run these tests on main branch
-# to generate new Percy master images
+# only generate "good" Percy images
+# when running tests against the main branch
 on:
   push:
     branches:
@@ -18,7 +18,7 @@ jobs:
         with:
           start: npm start
           record: true
-          group: main
+          group: push
           command-prefix: 'percy exec -- npx'
         env:
           # pass the Dashboard record key as an environment variable

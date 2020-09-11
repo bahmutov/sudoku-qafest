@@ -9,25 +9,31 @@ describe('StatusSection', () => {
     mount(
       <div className="innercontainer">
         <StatusSection />
-      </div>
+      </div>,
     )
     // let's wait for everything to render
     cy.wait(500)
 
     cy.get('.status__action-mistakes-mode')
-      .find('input[type=checkbox]').should('not.be.checked')
+      .find('input[type=checkbox]')
+      .should('not.be.checked')
 
-    const clip = { x: 0, y: 0, width: 400, height: 500 }
-    cy.matchImageSnapshot('status', { clip })
+    // if you want to use full test title + suffix
+    // cy.percySnapshot(cy.state('runnable').fullTitle() + ' - status')
 
     cy.log('**turn both modes on**')
-    cy.get('.status__action-mistakes-mode').click()
-      .find('input[type=checkbox]').should('be.checked')
+    cy.get('.status__action-mistakes-mode')
+      .click()
+      .find('input[type=checkbox]')
+      .should('be.checked')
     cy.get('.status__action-fast-mode')
-      .find('input[type=checkbox]').should('not.be.checked')
-    cy.get('.status__action-fast-mode').click()
-      .find('input[type=checkbox]').should('be.checked')
+      .find('input[type=checkbox]')
+      .should('not.be.checked')
+    cy.get('.status__action-fast-mode')
+      .click()
+      .find('input[type=checkbox]')
+      .should('be.checked')
 
-    cy.matchImageSnapshot('status-both-modes', { clip })
+    // cy.percySnapshot(cy.state('runnable').fullTitle() + ' - status-both-modes')
   })
 })

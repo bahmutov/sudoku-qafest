@@ -15,7 +15,7 @@ describe('App', () => {
     // let's make sure the board has rendered numbers
     expect(initArray[2]).to.not.equal('0')
     cy.get('.game__cell').eq(2).should('have.text', initArray[2])
-    cy.get('.container').matchImageSnapshot('same-game-mocked-sudoku')
+    // cy.get('.container').percySnapshot('same-game-mocked-sudoku')
   })
 
   it('plays first move', () => {
@@ -23,21 +23,23 @@ describe('App', () => {
     cy.clock()
     mount(<App />)
     cy.get('.game__cell').first().click()
-    cy.get('.game__cell').first().should('have.class', 'game__cell--highlightselected')
+    cy.get('.game__cell')
+      .first()
+      .should('have.class', 'game__cell--highlightselected')
     cy.contains('.status__number', 6).click()
     cy.get('.game__cell').first().should('have.text', '6')
-    cy.get('.container').matchImageSnapshot('first-move')
+    // cy.get('.container').percySnapshot('first-move')
   })
 
   it('looks right in different resolutions', () => {
     cy.stub(UniqueSudoku, 'getUniqueSudoku').returns([initArray, solvedArray])
     cy.clock()
     mount(<App />)
-    cy.viewport(500, 700)
-      .wait(100)
-    cy.get('.container').matchImageSnapshot('tablet')
-    cy.viewport(300, 700)
-      .wait(100)
-    cy.get('.container').matchImageSnapshot('mobile')
+    cy.viewport(500, 700).wait(100)
+    // cy.get('.container').percySnapshot('tablet')
+    cy.viewport(300, 700).wait(100)
+    // cy.get('.container').percySnapshot('mobile', {
+    //   widths: [300],
+    // })
   })
 })
