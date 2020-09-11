@@ -33,7 +33,7 @@ body {
   background: var(--background-color);
   color: var(--color-blue);
   font-family: 'Source Sans Pro', sans-serif;
-	line-height: 1.4em;
+  line-height: 1.4em;
   font-weight: 300;
 }
 
@@ -59,12 +59,12 @@ body {
 .header h1 {
   float: left;
   font-size: 24px;
-	font-weight: 600;
+  font-weight: 600;
   line-height: 2.75;
   color: var(--color-grey);
   -webkit-text-rendering: optimizeLegibility;
-	-moz-text-rendering: optimizeLegibility;
-	text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
 }
 
 .header__group-one {
@@ -90,7 +90,7 @@ body {
 }
 
 .header::after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -181,7 +181,7 @@ body {
 }
 
 .status__difficulty {
-  position: relative;
+  /* position: relative; */
   top: 39px;
   left: 20px;
 }
@@ -208,8 +208,8 @@ body {
   background-color: var(--background-color);
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
   background-repeat: no-repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
 }
 
 .status__time {
@@ -346,7 +346,7 @@ body {
 .status__action-mistakes-mode-slider:before,
 .status__action-fast-mode-slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 20px;
   width: 20px;
   left: 3px;
@@ -408,7 +408,7 @@ input:checked + .status__action-fast-mode-slider:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
   cursor: pointer;
 }
@@ -417,7 +417,7 @@ input:checked + .status__action-fast-mode-slider:before {
   display: block;
 }
 
-.overlay__text{
+.overlay__text {
   position: absolute;
   width: 100%;
   text-align: center;
@@ -427,10 +427,9 @@ input:checked + .status__action-fast-mode-slider:before {
   font-size: 60px;
   font-weight: 600;
   color: var(--color-orange);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.20),
-              0 10px 20px rgba(0, 0, 0, 0.25);
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 
 .overlay__textspan1 {
@@ -445,11 +444,11 @@ input:checked + .status__action-fast-mode-slider:before {
  * Add this to blur any DIV!
  */
 .blur {
-	-webkit-filter: blur(2px);
-	-moz-filter: blur(2px);
-	-o-filter: blur(2px);
-	-ms-filter: blur(2px);
-	filter: blur(2px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
 }
 
 /**
