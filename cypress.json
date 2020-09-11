@@ -3,5 +3,5 @@
   "projectId": "pjc5ry",
   "experimentalComponentTesting": true,
   "componentFolder": "src",
-  "testFiles": "**/*.spec.js"
+  "testFiles": "**/*spec.js"
 }

@@ -1,5 +1,10 @@
-name: push
-on: [push]
+name: main
+# only generate "good" Percy images
+# when running tests against the main branch
+on:
+  push:
+    branches:
+      - main
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
