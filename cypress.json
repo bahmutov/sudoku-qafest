@@ -1,4 +1,7 @@
 {
   "baseUrl": "http://localhost:3000",
-  "projectId": "pjc5ry"
+  "projectId": "pjc5ry",
+  "experimentalComponentTesting": true,
+  "componentFolder": "src",
+  "testFiles": "**/*.spec.js"
 }
