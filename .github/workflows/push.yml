@@ -1,5 +1,5 @@
 name: push-tests
-on: [push]
+on: []
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
