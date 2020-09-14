@@ -65,4 +65,40 @@ describe('App', () => {
     cy.get('.overlay').should('not.be.visible')
     cy.get('@getUniqueSudoku').should('have.been.calledTwice')
   })
+
+  context('works at resolution', () => {
+    const playGame = () => {
+      // start with all but the first cell filled with solved array
+      const almostSolved = [...solvedArray]
+      // by setting entry to "0" we effectively clear the cell
+      almostSolved[0] = '0'
+      cy.stub(UniqueSudoku, 'getUniqueSudoku')
+        .returns([almostSolved, solvedArray])
+        .as('getUniqueSudoku')
+      cy.clock()
+      mount(<App />)
+      cy.visualSnapshot('1 game is almost solved')
+
+      // win the game
+      cy.get('.game__cell').first().click()
+      // use the known number to fill the first cell
+      cy.contains('.status__number', solvedArray[0]).click()
+
+      // winning message displayed
+      cy.get('.overlay__text').should('be.visible')
+      cy.visualSnapshot('2 game is solved')
+    }
+
+    // using different viewport resolutions run the same test
+    // https://on.cypress.io/viewport
+    const tablet = [660, 700]
+    const phone = [400, 700]
+
+    ;[tablet, phone].forEach((resolution) => {
+      it(`${resolution[0]}x${resolution[1]}`, () => {
+        cy.viewport(...resolution)
+        playGame()
+      })
+    })
+  })
 })
