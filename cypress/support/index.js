@@ -10,5 +10,6 @@ Cypress.Commands.add('visualSnapshot', (maybeName) => {
   }
   cy.percySnapshot(snapshotTitle, {
     widths: [cy.state('viewportWidth')],
+    minHeight: cy.state('viewportHeight'),
   })
 })

@@ -50,10 +50,11 @@ describe('App', () => {
     mount(<App />)
     cy.visualSnapshot('1 game is almost solved')
 
+    // win the game
     cy.get('.game__cell').first().click()
-
-    // we can even look at the solved array!
+    // use the known number to fill the first cell
     cy.contains('.status__number', solvedArray[0]).click()
+
     // winning message displayed
     cy.get('.overlay__text').should('be.visible')
     cy.visualSnapshot('2 game is solved')
