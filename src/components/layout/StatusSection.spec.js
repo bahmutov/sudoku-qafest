@@ -18,8 +18,7 @@ describe('StatusSection', () => {
       .find('input[type=checkbox]')
       .should('not.be.checked')
 
-    // if you want to use full test title + suffix
-    // cy.percySnapshot(cy.state('runnable').fullTitle() + ' - status')
+    cy.visualSnapshot('1 - modes off')
 
     cy.log('**turn both modes on**')
     cy.get('.status__action-mistakes-mode')
@@ -34,6 +33,6 @@ describe('StatusSection', () => {
       .find('input[type=checkbox]')
       .should('be.checked')
 
-    // cy.percySnapshot(cy.state('runnable').fullTitle() + ' - status-both-modes')
+    cy.visualSnapshot('2- both modes')
   })
 })
